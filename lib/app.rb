@@ -17,10 +17,7 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  use Rack::CommonLogger, TorqueBox::Logger.new
-
   get '/users' do
-    logger.info('hi')
     User.all.collect { |u| u.email }
   end
 end

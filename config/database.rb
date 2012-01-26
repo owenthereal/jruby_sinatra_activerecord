@@ -32,7 +32,6 @@ ActiveRecord::Base.configurations[:test] = {
 }
 
 # Setup our logger
-require 'logger'
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 # Include Active Record class name as root for JSON serialized output.

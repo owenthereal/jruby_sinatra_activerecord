@@ -7,7 +7,6 @@ require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 Bundler.require(:default, APP_ENV)
 
-require 'torquebox'
 require 'sinatra/reloader' if APP_ENV == 'development'
 require 'active_record'
 
