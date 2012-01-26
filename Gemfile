@@ -6,9 +6,9 @@ platforms :mri do
 end
 
 platforms :jruby do
-  gem 'torquebox', '>= 2.0.0.beta3'
-  gem 'torquebox-server', '>= 2.0.0.beta3'
-  #gem 'trinidad'
+  #gem 'torquebox', '>= 2.0.0.beta3'
+  #gem 'torquebox-server', '>= 2.0.0.beta3'
+  gem 'trinidad'
   gem 'jruby-openssl'
   gem 'activerecord-jdbcsqlite3-adapter'
 end
@@ -19,3 +19,8 @@ gem 'sinatra-contrib'
 
 gem 'activerecord', '3.1.3'
 gem 'sinatra-activerecord'
+
+group :development do
+  gem 'rspec'
+  gem 'rack-test', :require => 'rack/test'
+end
