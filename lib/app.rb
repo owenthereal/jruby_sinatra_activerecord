@@ -36,6 +36,7 @@ class Application < Sinatra::Base
   end
 
   get '/users' do
+    User.create(:email => "foo#{Time.new.to_i}@bar.com")
     User.all.collect { |u| u.email }
   end
 end
