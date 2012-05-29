@@ -13,30 +13,44 @@
 #     :socket    => '/tmp/mysql.sock'
 #   }
 #
-ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Application.root('db', "development.db")
 
-}
+db = URI.parse(ENV['DATABASE_URL'] || "postgresql://localhost:5432/#{Application.environment.to_s}")
 
-ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'sqlite3',
-  :database => Application.root('db', "production.db")
+ActiveRecord::Base.establish_connection(
+  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+  :host     => db.host,
+  :port     => db.port,
+  :username => db.user,
+  :password => db.password,
+  :database => db.path[1..-1],
+  :encoding => 'utf8'
+)
 
-}
+#ActiveRecord::Base.configurations[:development] = {
+  #:adapter => 'postgresql',
+  #:encoding => 'utf8',
+  #:database => 'development',
+  #:username => 'Owen'
+#}
 
-ActiveRecord::Base.configurations[:test] = {
-  :adapter => 'sqlite3',
-  :database => Application.root('db', "test.db")
+#ActiveRecord::Base.configurations[:production] = {
+  #:adapter => 'sqlite3',
+  #:database => Application.root('db', "production.db")
 
-}
+#}
+
+#ActiveRecord::Base.configurations[:test] = {
+  #:adapter => 'sqlite3',
+  #:database => Application.root('db', "test.db")
+
+#}
 
 # Setup our logger
 require 'logger'
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 # Include Active Record class name as root for JSON serialized output.
-ActiveRecord::Base.include_root_in_json = true
+ActiveRecord::Base.include_root_in_json = false
 
 # Store the full class name (including module namespace) in STI type column.
 ActiveRecord::Base.store_full_sti_class = true
@@ -49,4 +63,4 @@ ActiveSupport.use_standard_json_time_format = true
 ActiveSupport.escape_html_entities_in_json = false
 
 # Now we can estabilish connection with our db
-ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Application.env])
+#ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[Application.environment])

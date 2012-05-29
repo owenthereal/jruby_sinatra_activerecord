@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 platforms :mri do
   gem 'thin'
-  gem 'sqlite3'
+  gem 'pg'
 end
 
 platforms :jruby do
@@ -10,14 +10,14 @@ platforms :jruby do
   #gem 'torquebox-server', '>= 2.0.0.beta3'
   gem 'trinidad'
   gem 'jruby-openssl'
-  gem 'activerecord-jdbcsqlite3-adapter'
+  gem 'activerecord-jdbcpostgresql-adapter'
 end
 
 gem 'rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
-gem 'activerecord', '3.1.3'
+gem 'activerecord'
 gem 'sinatra-activerecord'
 
 group :development do
